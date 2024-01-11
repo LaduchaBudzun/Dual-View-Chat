@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { OpenAIConfig, Message, Messages } from './chat.types';
+import { Message } from './chat.types';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 import {MAX_MESSAGES_COUNT } from 'src/constants';
@@ -8,11 +8,11 @@ import {MAX_MESSAGES_COUNT } from 'src/constants';
 
 @Injectable()
 export class ChatService {
-    private messages: Message[] = [];
+    private messages: Message[] = []; // It will be in DB in Production
 
-    constructor(private httpService: HttpService) {}
+    constructor(private readonly httpService: HttpService) {}
 
-    async getAIResponse(question: string): Promise<Message> {
+    async getAIResponse(question: string): Promise<Message | undefined>{
         try {
             this.addUserMessage(question);
             const response = await this.postToOpenAI();
@@ -62,7 +62,7 @@ export class ChatService {
         this.messages.push(aiMessage);
     }
 
-    private getLastMessage(): Message {
+    private getLastMessage(): Message | undefined {
         return this.messages[this.messages.length - 1];
     }
 }

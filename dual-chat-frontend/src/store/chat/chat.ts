@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { sendMessageToAI } from './chatThunk';
 import { ROLE_ASSISTANT } from '../../constants/main-constants';
-import { ErrorType, IChatState, IMessage } from '../../interfaces';
+import { IChatState, IMessage } from '../../interfaces';
 
 const initialState:IChatState = {
   messagesUser: [],
@@ -41,9 +41,6 @@ const chatSlice = createSlice({
         const newMessage:IMessage = {role: ROLE_ASSISTANT, content: action.payload.content, id: new Date().getTime()};
         state.messagesAI.unshift(newMessage);
       })
-      // .addCase(sendMessageToAI.rejected, (state, action) => {
-      //   state.error = action.payload;
-      // });
   }
 });
 
