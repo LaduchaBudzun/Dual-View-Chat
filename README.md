@@ -1,8 +1,8 @@
-#Dual-View Chat 
+# Dual-View Chat 
 
 ---
-###How to start the app
-  ###Backend:
+### How to start the app
+  ### Backend:
   ```
   *in ./dual-chat-backend
       1. add .env file
@@ -10,7 +10,7 @@
       3. npm run start:dev
   ```
     
-  ###Frontend:
+  ### Frontend:
   ```
     *in ./dual-chat-frontend
       1. add .env file
